@@ -1,0 +1,16 @@
+[
+{
+  "modid": "heisenui",
+  "name": "HeisenUI",
+  "description": "HeisenUI is a library that aids with GUIs.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "http://jadar.net/HeisenUI",
+  "updateUrl": "",
+  "authors": ["jadar", "hunterboerner"],
+  "credits": "Apple for having the best GUI creator around that Jadar just had to copy it.",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
