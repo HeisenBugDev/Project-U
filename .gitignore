@@ -24,3 +24,5 @@ bin/
 .settings/
 .gradle/
 eclipse/
+.idea/
+*.iml
