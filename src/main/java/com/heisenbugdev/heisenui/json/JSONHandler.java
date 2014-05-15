@@ -12,8 +12,8 @@ import java.io.Reader;
  */
 public class JSONHandler {
 
-    public static void main(String[] args) throws IOException {
-        try(Reader reader = new InputStreamReader(JSONHandler.class.getResourceAsStream("/file.json"), "UTF-8")) {
+    public static void jsonLoader(String fileLocation) throws IOException {
+        try(Reader reader = new InputStreamReader(JSONHandler.class.getResourceAsStream(fileLocation), "UTF-8")) {
             Gson gson = new GsonBuilder().create();
             GUIReader gui = gson.fromJson(reader, GUIReader.class);
         }
