@@ -1,6 +1,6 @@
 package com.heisenbugdev.heisenui.view;
 
-import com.heisenbugdev.heisenui.json.Map;
+import com.heisenbugdev.heisenui.json.HeisenViewModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -76,10 +76,10 @@ public class HeisenView
         this.targets.put(targetIdentifier, target);
     }
 
-    public static HeisenView viewForData(Map data)
+    public static HeisenView viewForData(HeisenViewModel data)
     {
         HeisenView view;
-
+        //String type = data.el
 
         return null;
     }

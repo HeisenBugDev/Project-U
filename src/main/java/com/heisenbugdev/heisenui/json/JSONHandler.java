@@ -11,12 +11,11 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Map;
 
 public class JSONHandler
 {
 
-    public static Map jsonLoaderFromFileLocation(String fileLocation) throws IOException
+    public static HeisenViewModel jsonLoaderFromFileLocation(String fileLocation) throws IOException
     {
         if (HeisenUI.DEBUG) HeisenLogger.debug("Reading JSON file" + fileLocation);
         String json = "";
@@ -39,16 +38,16 @@ public class JSONHandler
         return jsonLoader(json);
     }
 
-    public static Map jsonLoader(String json)
+    public static HeisenViewModel jsonLoader(String json)
     {
 
         Gson gson = new Gson();
 
-        Map data = null;
+        HeisenViewModel data = null;
 
         try
         {
-            data = gson.fromJson(json, Map.class);
+            data = gson.fromJson(json, HeisenViewModel.class);
         }
         catch (JsonSyntaxException e)
         {
