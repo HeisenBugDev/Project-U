@@ -40,6 +40,14 @@ minecraft {
     assetDir = "eclipse/assets"
 }
 
+test {
+    testLogging {
+        events 'passed', 'standardOut', 'standardError'
+    }
+    testClassesDir = sourceSets.test.output.classesDir
+    useJUnit()
+}
+
 processResources
 {
     // this will ensure that this task is redone when the versions change.
