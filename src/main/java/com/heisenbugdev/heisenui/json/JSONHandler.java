@@ -5,6 +5,7 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.heisenbugdev.heisenui.HeisenUI;
 import com.heisenbugdev.heisenui.logger.HeisenLogger;
+import net.minecraft.util.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -14,29 +15,49 @@ import java.util.Map;
 
 public class JSONHandler {
 
-    public static Map jsonLoader(String fileLocation) throws IOException {
+    public static Map jsonLoaderFromFileLocation(String fileLocation) throws IOException
+    {
+        if(HeisenUI.DEBUG) HeisenLogger.debug("Reading JSON file" + fileLocation);
+        String json = "";
+        try
+        {
+            BufferedReader br = new BufferedReader(new FileReader(fileLocation));
+            json = "";
+            while (br.ready())
+            {
+                json += br.readLine();
+            }
+        }
+        catch (FileNotFoundException e)
+        {
+            HeisenLogger.warn(e + fileLocation);
+        }
+
+        if (StringUtils.isNullOrEmpty(json)) return null;
+
+        return jsonLoader(json);
+    }
+
+    public static Map jsonLoader(String json) throws IOException {
 
         Gson gson = new Gson();
 
         Map data = null;
 
-        try {
-            if(HeisenUI.DEBUG) HeisenLogger.debug("Reading JSON file" + fileLocation);
-
-            BufferedReader br = new BufferedReader(new FileReader(fileLocation));
-
-            data = gson.fromJson(br, Map.class);
-
-        } catch (FileNotFoundException e) {
-            HeisenLogger.warn(e + fileLocation);
-        } catch (JsonSyntaxException e) {
+        try
+        {
+            data = gson.fromJson(json, Map.class);
+        }
+        catch (JsonSyntaxException e)
+        {
             HeisenLogger.warn(e);
-        } catch (JsonIOException e) {
+        }
+        catch (JsonIOException e)
+        {
             HeisenLogger.warn(e);
         }
 
         return data;
-
     }
 
 }
