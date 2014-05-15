@@ -17,6 +17,7 @@ public class HeisenViewController
     {
 
     }
+
     private void connectOutlets()
     {
         HashMap<String, HeisenView> outlets = view.getOutlets();
@@ -33,7 +34,7 @@ public class HeisenViewController
                 {
                     outlet.set(this, outletValue);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     HeisenLogger.fatal(String.format("Could not set outlet: %s to value %s", outletIdentifier, outletValue));
                     throw new RuntimeException(e);
@@ -47,8 +48,19 @@ public class HeisenViewController
 
     }
 
-    public void guiWillAppear() {}
-    public void guiDidAppear() {}
-    public void guiWillDisappear() {}
-    public void guiDidDisappear() {}
+    public void guiWillAppear()
+    {
+    }
+
+    public void guiDidAppear()
+    {
+    }
+
+    public void guiWillDisappear()
+    {
+    }
+
+    public void guiDidDisappear()
+    {
+    }
 }

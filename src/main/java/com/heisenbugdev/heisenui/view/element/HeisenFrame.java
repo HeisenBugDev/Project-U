@@ -1,6 +1,7 @@
 package com.heisenbugdev.heisenui.view.element;
 
-public class HeisenFrame {
+public class HeisenFrame
+{
 
     private int x;
     private int y;

@@ -16,7 +16,9 @@ public class HeisenView
     public boolean hidden = false;
     public HeisenFrame frame;
 
-    public HeisenView() {}
+    public HeisenView()
+    {
+    }
 
     public HeisenView(HashMap data)
     {
@@ -40,7 +42,7 @@ public class HeisenView
     {
         if (this.hidden) return;
 
-        for(HeisenView element : elements)
+        for (HeisenView element : elements)
         {
             element.draw(delta);
         }

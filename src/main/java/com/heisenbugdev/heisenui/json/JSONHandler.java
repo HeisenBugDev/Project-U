@@ -13,11 +13,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Map;
 
-public class JSONHandler {
+public class JSONHandler
+{
 
     public static Map jsonLoaderFromFileLocation(String fileLocation) throws IOException
     {
-        if(HeisenUI.DEBUG) HeisenLogger.debug("Reading JSON file" + fileLocation);
+        if (HeisenUI.DEBUG) HeisenLogger.debug("Reading JSON file" + fileLocation);
         String json = "";
         try
         {
@@ -38,7 +39,8 @@ public class JSONHandler {
         return jsonLoader(json);
     }
 
-    public static Map jsonLoader(String json) {
+    public static Map jsonLoader(String json)
+    {
 
         Gson gson = new Gson();
 
