@@ -18,6 +18,7 @@ public class HeisenUI
     public static HeisenUI instance;
     @SidedProxy(clientSide = "com.heisenbugdev.heisenui.proxy.UIClientProxy", serverSide = "com.heisenbugdev.heisenui.proxy.UIProxy")
     public static UIProxy proxy;
+
     public static Item debugItem = new DebugItem();
 
     public HeisenUI()
@@ -38,7 +39,15 @@ public class HeisenUI
             GameRegistry.registerItem(debugItem, debugItem.getUnlocalizedName());
         }
 
+        this.proxy.registerDefaultViewElements();
     }
 
+    /**
+     * TODO: Implement this
+     * @param identifier the identifier with the string
+     */
+    public void displayViewWithIdentifier(String identifier)
+    {
 
+    }
 }
