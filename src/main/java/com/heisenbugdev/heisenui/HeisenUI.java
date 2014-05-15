@@ -10,7 +10,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
 
 @Mod(modid = HeisenProperties.MOD_IDENTIFICATION, name = HeisenProperties.MOD_NAME, version = HeisenProperties.MOD_VERSION)
-public class HeisenUI {
+public class HeisenUI
+{
 
     public static final Boolean DEBUG = false;
     @Instance
@@ -19,15 +20,20 @@ public class HeisenUI {
     public static UIProxy proxy;
     public static Item debugItem = new DebugItem();
 
-    public HeisenUI() {
+    public HeisenUI()
+    {
     }
 
     @Mod.EventHandler
-    public void init(FMLInitializationEvent event) {
+    public void init(FMLInitializationEvent event)
+    {
 
-        if (!DEBUG) {
+        if (!DEBUG)
+        {
             HeisenLogger.info("Debugging is NOT enabled!");
-        } else {
+        }
+        else
+        {
             HeisenLogger.info("Debugging is enabled!");
             GameRegistry.registerItem(debugItem, debugItem.getUnlocalizedName());
         }
