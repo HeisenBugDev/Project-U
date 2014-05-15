@@ -1,6 +1,8 @@
 package com.heisenbugdev.heisenui.view.element;
 
-public class HeisenTextField
+import com.heisenbugdev.heisenui.view.HeisenView;
+
+public class HeisenTextField extends HeisenView
 {
 
     private String text;
