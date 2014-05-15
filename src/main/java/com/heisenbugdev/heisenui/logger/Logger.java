@@ -1,4 +1,4 @@
-package com.heisenbugdev.heisenui.Logger;
+package com.heisenbugdev.heisenui.logger;
 
 import com.heisenbugdev.heisenui.HeisenProperties;
 import cpw.mods.fml.common.FMLLog;
