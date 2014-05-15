@@ -1,5 +1,7 @@
 package com.heisenbugdev.heisenui.view;
 
+import com.heisenbugdev.heisenui.logger.HeisenLogger;
+
 import java.lang.reflect.Field;
 import java.util.HashMap;
 
@@ -33,7 +35,8 @@ public class HeisenViewController
                 }
                 catch(Exception e)
                 {
-
+                    HeisenLogger.fatal(String.format("Could not set outlet: %s to value %s", outletIdentifier, outletValue));
+                    throw new RuntimeException(e);
                 }
             }
         }

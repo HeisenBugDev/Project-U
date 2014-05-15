@@ -5,11 +5,11 @@ import java.util.HashMap;
 public class HeisenView
 {
 
-    private HashMap outlets;
+    private HashMap<String, HeisenView> outlets;
     private HashMap targets;
 
 
-    public HashMap getOutlets()
+    public HashMap<String, HeisenView> getOutlets()
     {
         return outlets;
     }

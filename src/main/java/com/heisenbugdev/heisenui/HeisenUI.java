@@ -1,6 +1,6 @@
 package com.heisenbugdev.heisenui;
 
-import com.heisenbugdev.heisenui.logger.Logger;
+import com.heisenbugdev.heisenui.logger.HeisenLogger;
 import com.heisenbugdev.heisenui.proxy.UIProxy;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
@@ -28,9 +28,9 @@ public class HeisenUI
     {
 
         if(!DEBUG) {
-            Logger.info("Debugging is NOT enabled!");
+            HeisenLogger.info("Debugging is NOT enabled!");
         } else {
-            Logger.info("Debugging is enabled!");
+            HeisenLogger.info("Debugging is enabled!");
         }
 
     }
