@@ -7,7 +7,8 @@ import org.apache.logging.log4j.Level;
 /**
  * Created by Ash on 15/05/2014.
  */
-public class Logger {
+public class HeisenLogger
+{
 
     public static void log(Level logLevel, Object object) {
         FMLLog.log(HeisenProperties.MOD_IDENTIFICATION, logLevel, "[HeisenUI] " + String.valueOf(object));
