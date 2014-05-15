@@ -1,6 +1,6 @@
 package com.heisenbugdev.heisenui.view;
 
-import com.heisenbugdev.heisenui.json.Map;
+import com.heisenbugdev.heisenui.json.HeisenViewModel;
 import com.heisenbugdev.heisenui.logger.HeisenLogger;
 
 import java.lang.reflect.Field;
@@ -13,9 +13,9 @@ public class HeisenViewController
     public HeisenViewController parentViewController;
     private HeisenView _view;
 
-    private Map data;
+    private HeisenViewModel data;
 
-    public HeisenViewController(Map data, HeisenViewController parentViewController)
+    public HeisenViewController(HeisenViewModel data, HeisenViewController parentViewController)
     {
         this.parentViewController = parentViewController;
         this.data = data;
