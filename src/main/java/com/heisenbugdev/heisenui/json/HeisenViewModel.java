@@ -2,7 +2,7 @@ package com.heisenbugdev.heisenui.json;
 
 import java.util.List;
 
-public class Map
+public class HeisenViewModel
 {
 
     private int identifier;
@@ -79,12 +79,12 @@ public class Map
             this.type = type;
         }
 
-        public List<Map.frame> getFrame()
+        public List<HeisenViewModel.frame> getFrame()
         {
             return frame;
         }
 
-        public void setFrame(List<Map.frame> frame)
+        public void setFrame(List<HeisenViewModel.frame> frame)
         {
             this.frame = frame;
         }
