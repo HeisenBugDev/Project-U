@@ -2,6 +2,7 @@ package com.heisenbugdev.heisenui.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.heisenbugdev.heisenui.logger.Logger;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -16,6 +17,8 @@ public class JSONHandler {
         try(Reader reader = new InputStreamReader(JSONHandler.class.getResourceAsStream(fileLocation), "UTF-8")) {
             Gson gson = new GsonBuilder().create();
             GUIReader gui = gson.fromJson(reader, GUIReader.class);
+        } catch(Exception e) {
+            Logger.fatal(e);
         }
     }
 
