@@ -34,5 +34,12 @@ public class HeisenUI {
 
     }
 
+    /**
+     * TODO: Implement this
+     * @param identifier the identifier with the string
+     */
+    public void displayViewWithIdentifier(String identifier)
+    {
 
+    }
 }
