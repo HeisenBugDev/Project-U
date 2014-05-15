@@ -5,6 +5,9 @@ package com.heisenbugdev.heisenui.json;
  */
 public class GUIReader {
 
+    //TODO: add strings and getters for hashmap
 
+    private String String;
+    private String etc;
 
 }
