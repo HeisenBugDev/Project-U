@@ -1,21 +1,23 @@
 package com.heisenbugdev.heisenui.json;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HeisenViewModel
 {
 
-    private int identifier;
+    private String identifier;
     private String targets;
     private String controllerClass;
     private int order;
+    public ArrayList<elements> elements;
 
-    public int getIdentifier()
+    public String getIdentifier()
     {
         return identifier;
     }
 
-    public void setIdentifier(int identifier)
+    public void setIdentifier(String identifier)
     {
         this.identifier = identifier;
     }
@@ -48,6 +50,16 @@ public class HeisenViewModel
     public void setOrder(int order)
     {
         this.order = order;
+    }
+
+    public ArrayList<HeisenViewModel.elements> getElements()
+    {
+        return elements;
+    }
+
+    public void setElements(ArrayList<HeisenViewModel.elements> elements)
+    {
+        this.elements = elements;
     }
 
     public static class elements
