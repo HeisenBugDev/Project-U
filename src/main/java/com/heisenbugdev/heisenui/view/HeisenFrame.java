@@ -1,4 +1,4 @@
-package com.heisenbugdev.heisenui.view.element;
+package com.heisenbugdev.heisenui.view;
 
 public class HeisenFrame
 {
