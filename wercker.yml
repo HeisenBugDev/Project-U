@@ -10,6 +10,14 @@ build:
           javac -version
     # A step that executes `gradle build` command
     - script:
-        name: run gradle
+        name: setup ForgeGradle workspace
         code: |
-          gradle --full-stacktrace -q --project-cache-dir=$WERCKER_CACHE_DIR setupCIWorkspace build
+          gradle --full-stacktrace -q --project-cache-dir=$WERCKER_CACHE_DIR setupCIWorkspace
+    - script:
+            name: run tests
+            code: |
+              gradle --full-stacktrace -q --project-cache-dir=$WERCKER_CACHE_DIR test
+    - script:
+            name: run build
+            code: |
+              gradle --full-stacktrace -q --project-cache-dir=$WERCKER_CACHE_DIR build
