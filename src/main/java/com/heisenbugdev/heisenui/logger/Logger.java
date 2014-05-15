@@ -1,4 +1,4 @@
-package com.heisenbugdev.heisenui.logger;
+package com.heisenbugdev.heisenui.Logger;
 
 import com.heisenbugdev.heisenui.HeisenProperties;
 import cpw.mods.fml.common.FMLLog;
@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Level;
 /**
  * Created by Ash on 15/05/2014.
  */
-public class logger {
+public class Logger {
 
     public static void log(Level logLevel, Object object) {
         FMLLog.log(HeisenProperties.MOD_IDENTIFICATION, logLevel, "[HeisenUI] " + String.valueOf(object));
