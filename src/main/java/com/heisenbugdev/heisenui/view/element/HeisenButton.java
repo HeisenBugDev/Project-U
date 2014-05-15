@@ -1,4 +1,4 @@
-package com.heisenbugdev.heisenui.uielements;
+package com.heisenbugdev.heisenui.view.element;
 
 public class HeisenButton {
 
