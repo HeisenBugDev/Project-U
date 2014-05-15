@@ -4,9 +4,6 @@ import com.heisenbugdev.heisenui.HeisenProperties;
 import cpw.mods.fml.common.FMLLog;
 import org.apache.logging.log4j.Level;
 
-/**
- * Created by Ash on 15/05/2014.
- */
 public class HeisenLogger
 {
 
