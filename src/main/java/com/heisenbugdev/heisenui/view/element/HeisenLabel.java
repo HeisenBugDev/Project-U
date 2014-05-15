@@ -1,6 +1,9 @@
 package com.heisenbugdev.heisenui.view.element;
 
-public class HeisenLabel {
+import com.heisenbugdev.heisenui.view.HeisenView;
+
+public class HeisenLabel extends HeisenView
+{
 
     private String label;
 

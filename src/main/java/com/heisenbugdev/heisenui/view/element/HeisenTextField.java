@@ -1,6 +1,7 @@
 package com.heisenbugdev.heisenui.view.element;
 
-public class HeisenText {
+public class HeisenTextField
+{
 
     private String text;
 
