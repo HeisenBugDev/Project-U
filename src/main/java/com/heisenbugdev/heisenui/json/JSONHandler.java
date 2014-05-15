@@ -38,7 +38,7 @@ public class JSONHandler {
         return jsonLoader(json);
     }
 
-    public static Map jsonLoader(String json) throws IOException {
+    public static Map jsonLoader(String json) {
 
         Gson gson = new Gson();
 

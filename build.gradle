@@ -15,7 +15,12 @@ buildscript {
     }
 }
 
+//apply plugin: 'java;'
 apply plugin: 'forge'
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}
 
 // TODO: add uploading to HeisenBugDev.
 
@@ -33,6 +38,14 @@ archivesBaseName = "HeisenUI"
 minecraft {
     version = "1.7.2-10.12.1.1071"
     assetDir = "eclipse/assets"
+}
+
+test {
+    testLogging {
+        events 'passed', 'standardOut', 'standardError'
+    }
+    testClassesDir = sourceSets.test.output.classesDir
+    useJUnit()
 }
 
 processResources
