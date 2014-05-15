@@ -15,7 +15,12 @@ buildscript {
     }
 }
 
+//apply plugin: 'java;'
 apply plugin: 'forge'
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}
 
 // TODO: add uploading to HeisenBugDev.
 
