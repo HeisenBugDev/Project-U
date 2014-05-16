@@ -72,7 +72,7 @@ public interface GuiHeisenView
         public void initGui()
         {
             super.initGui();
-            this.view().executeTarget("initGui");
+            this.view().invokeTarget("initGui");
 
         }
     }

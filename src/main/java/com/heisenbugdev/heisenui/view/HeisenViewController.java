@@ -1,7 +1,6 @@
 package com.heisenbugdev.heisenui.view;
 
 import com.heisenbugdev.heisenui.json.HeisenViewModel;
-import com.heisenbugdev.heisenui.logger.HeisenLogger;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -13,21 +12,45 @@ public class HeisenViewController
     public HeisenViewController parentViewController;
     private HeisenView _view;
 
-    private HeisenViewModel data;
+    //private HeisenViewModel data;
+    private HashMap<String, Outlet> _outlets;
+    private HashMap<String, Target> _targets;
 
     public HeisenViewController(HeisenViewModel data, HeisenViewController parentViewController)
     {
         this.parentViewController = parentViewController;
-        this.data = data;
+        this._view = HeisenView.viewForData(data.getView());
 
-        connectOutlets();
-        connectTargets();
 
+        registerOutlets();
+        registerTargets();
+
+        this._view.connectOutlets(this.outlets());
+        this._view.connectTargets(this.targets());
     }
 
-    private void connectOutlets()
+    public HashMap<String, Outlet> outlets()
     {
-        HashMap<String, HeisenView> outlets = view().getOutlets();
+        if (this._outlets == null)
+        {
+            this._outlets = new HashMap<String, Outlet>();
+        }
+        return this._outlets;
+    }
+
+    public HashMap<String, Target> targets()
+    {
+        if (this._targets == null)
+        {
+            this._targets = new HashMap<String, Target>();
+        }
+        return this._targets;
+    }
+
+
+    private void registerOutlets()
+    {
+        //HashMap<String, HeisenView> outlets = view().getOutlets();
 
         // gets all the fields
         Field[] fields = this.getClass().getFields();
@@ -37,20 +60,12 @@ public class HeisenViewController
             if (annotation == null) continue;
 
             String outletIdentifier = annotation.value();
-            HeisenView outletValue = outlets.get(outletIdentifier);
-            try
-            {
-                outlet.set(this, outletValue);
-            }
-            catch (Exception e)
-            {
-                HeisenLogger.fatal(String.format("Could not set outlet: %s to value %s", outletIdentifier, outletValue));
-                throw new RuntimeException(e);
-            }
+            this.outlets().put(outletIdentifier, new Outlet(outletIdentifier, outlet));
+
         }
     }
 
-    private void connectTargets()
+    private void registerTargets()
     {
         // gets all the methods
         Method[] methods = this.getClass().getMethods();
@@ -61,7 +76,7 @@ public class HeisenViewController
 
             String targetIdentifier = annotation.value();
             Target target = new Target(this, method);
-            this.view().registerTarget(targetIdentifier, target);
+            this.targets().put(targetIdentifier, target);
         }
     }
 
@@ -80,11 +95,11 @@ public class HeisenViewController
      */
     public void loadView()
     {
-        this._view = HeisenView.viewForData(this.data);
+        //this._view = HeisenView.viewForData(this.data);
     }
 
     /**
-     * Use this method to set up view elements.
+     * Use this method to set up view subviews.
      */
     @UITarget("initGui")
     public void initGui()

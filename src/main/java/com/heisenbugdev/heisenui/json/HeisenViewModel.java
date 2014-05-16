@@ -1,35 +1,25 @@
 package com.heisenbugdev.heisenui.json;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.heisenbugdev.heisenui.view.HeisenFrame;
 
+import java.util.ArrayList;
+import java.util.Map;
+
+/**
+ * Views are deserialized into here.
+ */
 public class HeisenViewModel
 {
 
     private String identifier;
-    private String targets;
     private String controllerClass;
-    private int order;
-    public ArrayList<elements> elements;
+    private View view;
+    private ArrayList<HeisenViewModel.Outlet> outlets;
+    private ArrayList<HeisenViewModel.Target> targets;
 
     public String getIdentifier()
     {
         return identifier;
-    }
-
-    public void setIdentifier(String identifier)
-    {
-        this.identifier = identifier;
-    }
-
-    public String getTargets()
-    {
-        return targets;
-    }
-
-    public void setTargets(String targets)
-    {
-        this.targets = targets;
     }
 
     public String getControllerClass()
@@ -37,68 +27,44 @@ public class HeisenViewModel
         return controllerClass;
     }
 
-    public void setControllerClass(String controllerClass)
+    public View getView()
     {
-        this.controllerClass = controllerClass;
+        return view;
     }
 
-    public int getOrder()
+    public ArrayList<Outlet> getOutlets()
     {
-        return order;
+        return outlets;
     }
 
-    public void setOrder(int order)
+    public ArrayList<Target> getTargets()
     {
-        this.order = order;
+        return targets;
     }
 
-    public ArrayList<HeisenViewModel.elements> getElements()
-    {
-        return elements;
-    }
-
-    public void setElements(ArrayList<HeisenViewModel.elements> elements)
-    {
-        this.elements = elements;
-    }
-
-    public static class elements
+    public static class View
     {
         private String identifier;
-        private int type;
-        private List<frame> frame;
+        private String type;
+        private HeisenFrame frame;
         private int origin;
         private boolean hidden;
-        private List<label> text;
+        private Map<String, Object> attributes;
+        private ArrayList<View> subviews;
 
         public String getIdentifier()
         {
             return identifier;
         }
 
-        public void setIdentifier(String identifier)
-        {
-            this.identifier = identifier;
-        }
-
-        public int getType()
+        public String getType()
         {
             return type;
         }
 
-        public void setType(int type)
-        {
-            this.type = type;
-        }
-
-        public List<HeisenViewModel.frame> getFrame()
+        public HeisenFrame getFrame()
         {
             return frame;
-        }
-
-        public void setFrame(List<HeisenViewModel.frame> frame)
-        {
-            this.frame = frame;
         }
 
         public int getOrigin()
@@ -106,107 +72,23 @@ public class HeisenViewModel
             return origin;
         }
 
-        public void setOrigin(int origin)
-        {
-            this.origin = origin;
-        }
-
         public boolean isHidden()
         {
             return hidden;
         }
 
-        public void setHidden(boolean hidden)
+        public Map<String, Object> getAttributes()
         {
-            this.hidden = hidden;
+            return attributes;
         }
 
-        public List<label> getText()
+        public ArrayList<View> getSubviews()
         {
-            return text;
-        }
-
-        public void setText(List<label> text)
-        {
-            this.text = text;
+            return subviews;
         }
     }
 
-    public static class frame
-    {
-        private int x;
-        private int y;
-        private int width;
-        private int height;
-
-        public int getX()
-        {
-            return x;
-        }
-
-        public void setX(int x)
-        {
-            this.x = x;
-        }
-
-        public int getY()
-        {
-            return y;
-        }
-
-        public void setY(int y)
-        {
-            this.y = y;
-        }
-
-        public int getWidth()
-        {
-            return width;
-        }
-
-        public void setWidth(int width)
-        {
-            this.width = width;
-        }
-
-        public int getHeight()
-        {
-            return height;
-        }
-
-        public void setHeight(int height)
-        {
-            this.height = height;
-        }
-    }
-
-    public static class label
-    {
-        private String content;
-        private int size;
-
-        public String getContent()
-        {
-            return content;
-        }
-
-        public void setContent(String content)
-        {
-            this.content = content;
-        }
-
-        public int getSize()
-        {
-            return size;
-        }
-
-        public void setSize(int size)
-        {
-            this.size = size;
-        }
-    }
-
-    public static class outlets
+    public static class Outlet
     {
         private String elementIdentifier;
         private String identifier;
@@ -216,23 +98,13 @@ public class HeisenViewModel
             return elementIdentifier;
         }
 
-        public void setElementIdentifier(String elementIdentifier)
-        {
-            this.elementIdentifier = elementIdentifier;
-        }
-
         public String getIdentifier()
         {
             return identifier;
         }
-
-        public void setIdentifier(String identifier)
-        {
-            this.identifier = identifier;
-        }
     }
 
-    public static class targets
+    public static class Target
     {
         private String elementIdentifier;
         private String identifier;
@@ -243,29 +115,14 @@ public class HeisenViewModel
             return elementIdentifier;
         }
 
-        public void setElementIdentifier(String elementIdentifier)
-        {
-            this.elementIdentifier = elementIdentifier;
-        }
-
         public String getIdentifier()
         {
             return identifier;
         }
 
-        public void setIdentifier(String identifier)
-        {
-            this.identifier = identifier;
-        }
-
         public String getAction()
         {
             return action;
-        }
-
-        public void setAction(String action)
-        {
-            this.action = action;
         }
     }
 
