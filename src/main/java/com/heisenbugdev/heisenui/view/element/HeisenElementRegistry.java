@@ -1,6 +1,7 @@
 package com.heisenbugdev.heisenui.view.element;
 
 
+import com.heisenbugdev.heisenui.proxy.UIProxy;
 import com.heisenbugdev.heisenui.view.HeisenView;
 
 import java.util.HashMap;
@@ -18,7 +19,7 @@ public enum HeisenElementRegistry
 
     public void registerViewElement(Class<? extends HeisenView> clazz)
     {
-        String name = clazz.getEnclosingClass().getName();
+        String name = UIProxy.nameForClass(clazz);
         if (this.registry.containsKey(name))
         {
             throw new IndexOutOfBoundsException(String.format("HeisenElementRegistry already contains a registered element for class: %s", name));

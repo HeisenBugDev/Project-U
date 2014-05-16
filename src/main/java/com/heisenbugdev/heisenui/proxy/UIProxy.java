@@ -12,4 +12,18 @@ public class UIProxy
         HeisenElementRegistry.INSTANCE.registerViewElement(HeisenTextField.class);
         HeisenElementRegistry.INSTANCE.registerViewElement(HeisenTextureView.class);
     }
+
+    public static String nameForClass(Class clazz)
+    {
+        Class<?> enclosingClass = clazz.getEnclosingClass();
+        if (enclosingClass != null)
+        {
+            return enclosingClass.getName();
+        }
+        else
+        {
+            return clazz.getName();
+        }
+    }
+
 }

@@ -3,30 +3,34 @@ package com.heisenbugdev.heisenui.view;
 import com.heisenbugdev.heisenui.json.HeisenViewModel;
 import com.heisenbugdev.heisenui.view.element.HeisenElementRegistry;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class HeisenView
 {
-
-    private HeisenViewModel.View data = null;
-
-    public Map<String, HeisenView> subviews;
+    public Map<String, HeisenView> _subviews;
     private Map<String, Target> targets;
-
 
     public boolean hidden = false;
     public HeisenFrame frame;
     public String identifier = "";
 
-    public HeisenView()
+    public HeisenView() {}
+
+    public Map<String, HeisenView> subviews()
     {
+        if (_subviews == null)
+        {
+            _subviews = new HashMap<String, HeisenView>();
+        }
+        return _subviews;
     }
 
     public void addSubview(HeisenView view)
     {
         if (view != this)
         {
-            subviews.put(view.identifier, view);
+            subviews().put(view.identifier, view);
         }
     }
 
@@ -47,14 +51,14 @@ public class HeisenView
     {
         for (Map.Entry<String, Outlet> outlet : outlets.entrySet())
         {
-            HeisenView view = this.subviews.get(outlet.getKey());
+            HeisenView view = this.subviews().get(outlet.getKey());
             if (view != null)
             {
                 outlet.getValue().set(view);
             }
         }
 
-        for (HeisenView view : this.subviews.values())
+        for (HeisenView view : this.subviews().values())
         {
             view.connectOutlets(outlets);
         }
@@ -66,7 +70,7 @@ public class HeisenView
     {
         if (this.hidden) return;
 
-        for (Map.Entry<String, HeisenView> entry : subviews.entrySet())
+        for (Map.Entry<String, HeisenView> entry : subviews().entrySet())
         {
             HeisenView subview = entry.getValue();
             subview.draw(delta);
@@ -77,6 +81,7 @@ public class HeisenView
     {
         HeisenView view = null;
         Class<? extends HeisenView> clazz = HeisenElementRegistry.INSTANCE.getRegisteredViewClass(data.getType());
+        if (clazz == null) clazz = HeisenView.class;
 
         try
         {
@@ -86,12 +91,14 @@ public class HeisenView
             view.identifier = data.getIdentifier();
             view.setAttributes(data.getAttributes());
 
-            for (HeisenViewModel.View subviewModel : data.getSubviews())
+            if (data.getSubviews() != null)
             {
-                HeisenView subview = HeisenView.viewForData(subviewModel);
-                view.addSubview(subview);
+                for (HeisenViewModel.View subviewModel : data.getSubviews())
+                {
+                    HeisenView subview = HeisenView.viewForData(subviewModel);
+                    view.addSubview(subview);
+                }
             }
-
             //for (HeisenViewModel.Outlet outlet : data.Out)
         }
         catch (InstantiationException e)
