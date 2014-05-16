@@ -54,7 +54,7 @@ public class HeisenView
             HeisenView view = this.subviews().get(outlet.getKey());
             if (view != null)
             {
-                outlet.getValue().set(view);
+                outlet.set(view);
             }
         }
 

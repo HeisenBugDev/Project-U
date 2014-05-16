@@ -42,9 +42,9 @@ minecraft {
 
 test {
     testLogging {
-        events 'passed', 'standardOut', 'standardError'
+        events 'passed', 'failed', 'standardOut', 'standardError'
     }
-    testClassesDir = sourceSets.test.output.classesDir
+    //testClassesDir = sourceSets.test.output.classesDir
     useJUnit()
 }
 
