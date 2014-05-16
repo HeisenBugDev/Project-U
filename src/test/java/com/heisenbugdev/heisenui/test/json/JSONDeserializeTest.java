@@ -15,7 +15,7 @@ public class JSONDeserializeTest
     @Test
     public void testJSONDeserialize()
     {
-        String json = "{ 'identifier': 'Test', 'elements': [{'identifier': 'TestElement'}]}";
+        String json = "{ 'identifier': 'Test', 'subviews': [{'identifier': 'TestElement'}]}";
 
         HeisenViewModel data = JSONHandler.jsonLoader(json);
 

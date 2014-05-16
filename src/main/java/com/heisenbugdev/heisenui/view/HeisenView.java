@@ -1,64 +1,36 @@
 package com.heisenbugdev.heisenui.view;
 
 import com.heisenbugdev.heisenui.json.HeisenViewModel;
+import com.heisenbugdev.heisenui.view.element.HeisenElementRegistry;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 
 public class HeisenView
 {
 
-    public ArrayList<HeisenView> elements;
+    private HeisenViewModel.View data = null;
 
-    private HashMap<String, HeisenView> outlets;
-    private HashMap<String, Target> targets;
+    public Map<String, HeisenView> subviews;
+    private Map<String, Target> targets;
 
 
     public boolean hidden = false;
     public HeisenFrame frame;
+    public String identifier = "";
 
     public HeisenView()
     {
-    }
-
-    public HeisenView(HashMap data)
-    {
-        this();
-
-//        Map frameData = data.get("frame");
-
-    }
-
-    public HashMap<String, HeisenView> getOutlets()
-    {
-        return outlets;
-    }
-
-    public HashMap getTargets()
-    {
-        return targets;
-    }
-
-    public void draw(float delta)
-    {
-        if (this.hidden) return;
-
-        for (HeisenView element : elements)
-        {
-            element.draw(delta);
-        }
     }
 
     public void addSubview(HeisenView view)
     {
         if (view != this)
         {
-            elements.add(view);
+            subviews.put(view.identifier, view);
         }
     }
 
-
-    public void executeTarget(String targetIdentifier)
+    public void invokeTarget(String targetIdentifier)
     {
         if (this.targets.containsKey(targetIdentifier))
         {
@@ -66,21 +38,73 @@ public class HeisenView
         }
     }
 
-    public void registerTarget(String targetIdentifier, Target target)
+    public void connectTargets(Map<String, Target> targets)
     {
-        if (this.targets.containsKey(targetIdentifier))
-        {
-            this.targets.remove(targetIdentifier);
-        }
-
-        this.targets.put(targetIdentifier, target);
+        this.targets = targets;
     }
 
-    public static HeisenView viewForData(HeisenViewModel data)
+    public void connectOutlets(Map<String, Outlet> outlets)
     {
-        HeisenView view;
-        //String type = data.el
+        for (Map.Entry<String, Outlet> outlet : outlets.entrySet())
+        {
+            HeisenView view = this.subviews.get(outlet.getKey());
+            if (view != null)
+            {
+                outlet.getValue().set(view);
+            }
+        }
 
-        return null;
+        for (HeisenView view : this.subviews.values())
+        {
+            view.connectOutlets(outlets);
+        }
+    }
+
+    public void setAttributes(Map<String,Object> attributes) {}
+
+    public void draw(float delta)
+    {
+        if (this.hidden) return;
+
+        for (Map.Entry<String, HeisenView> entry : subviews.entrySet())
+        {
+            HeisenView subview = entry.getValue();
+            subview.draw(delta);
+        }
+    }
+
+    public static HeisenView viewForData(HeisenViewModel.View data)
+    {
+        HeisenView view = null;
+        Class<? extends HeisenView> clazz = HeisenElementRegistry.INSTANCE.getRegisteredViewClass(data.getType());
+
+        try
+        {
+            view = clazz.newInstance();
+            view.frame = data.getFrame();
+            view.hidden = data.isHidden();
+            view.identifier = data.getIdentifier();
+            view.setAttributes(data.getAttributes());
+
+            for (HeisenViewModel.View subviewModel : data.getSubviews())
+            {
+                HeisenView subview = HeisenView.viewForData(subviewModel);
+                view.addSubview(subview);
+            }
+
+            //for (HeisenViewModel.Outlet outlet : data.Out)
+        }
+        catch (InstantiationException e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+        catch (IllegalAccessException e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+
+        return view;
     }
 }

@@ -11,8 +11,8 @@ public class Target
         this.objectInstance = objectInstance;
     }
 
-    public Method method;
-    public Object objectInstance;
+    private Method method;
+    private Object objectInstance;
 
     public void invoke(Object... args)
     {
@@ -29,5 +29,15 @@ public class Target
         {
             throw new RuntimeException(e);
         }
+    }
+
+    public Method getMethod()
+    {
+        return method;
+    }
+
+    public Object getObjectInstance()
+    {
+        return objectInstance;
     }
 }
