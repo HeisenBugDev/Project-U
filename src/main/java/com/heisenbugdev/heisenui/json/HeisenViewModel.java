@@ -15,7 +15,6 @@ public class HeisenViewModel
     private String identifier;
     private String controllerClass;
     private View view;
-    private ResourceLocation textuerLocation;
     private ArrayList<HeisenViewModel.Outlet> outlets;
     private ArrayList<HeisenViewModel.Target> targets;
 
@@ -32,10 +31,6 @@ public class HeisenViewModel
     public View getView()
     {
         return view;
-    }
-
-    public ResourceLocation getTextuerLocation() {
-        return textuerLocation;
     }
 
     public ArrayList<Outlet> getOutlets()
@@ -55,6 +50,7 @@ public class HeisenViewModel
         private HeisenFrame frame;
         private int origin;
         private boolean hidden;
+        private ResourceLocation textuerLocation;
         private Map<String, Object> attributes;
         private ArrayList<View> subviews;
 
@@ -81,6 +77,10 @@ public class HeisenViewModel
         public boolean isHidden()
         {
             return hidden;
+        }
+
+        public ResourceLocation getTextuerLocation() {
+            return textuerLocation;
         }
 
         public Map<String, Object> getAttributes()
