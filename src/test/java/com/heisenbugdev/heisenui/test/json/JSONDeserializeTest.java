@@ -3,7 +3,11 @@ package com.heisenbugdev.heisenui.test.json;
 import com.heisenbugdev.heisenui.json.HeisenViewModel;
 import com.heisenbugdev.heisenui.json.JSONHandler;
 import com.heisenbugdev.heisenui.proxy.UIProxy;
+import com.heisenbugdev.heisenui.view.HeisenView;
 import com.heisenbugdev.heisenui.view.HeisenViewController;
+import com.heisenbugdev.heisenui.view.UIOutlet;
+import com.heisenbugdev.heisenui.view.UITarget;
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -24,14 +28,38 @@ public class JSONDeserializeTest
     }
 
     @Test
-    public void testOutlets()
+    public void testOutletsAndTargets()
     {
         new UIProxy().registerDefaultViewElements();
 
         String json = "{ 'identifier': 'Test', 'view': {'identifier': 'TestElement', 'subviews': [{'identifier': 'TestElement2'}]}}";
         HeisenViewModel data = JSONHandler.jsonLoader(json);
 
-        HeisenViewController controller = new HeisenViewController(data, null);
-        //Assert.fail();
+        TestViewController controller = new TestViewController(data, null);
+        controller.view().invokeTarget("test");
+
+        Assert.assertEquals("Hello World!", controller.targetTest1);
+        Assert.assertNotNull(controller.outletTest1);
     }
+
+    public static class TestViewController extends HeisenViewController
+    {
+        public String targetTest1 = "";
+
+        @UIOutlet("TestElement2")
+        public HeisenView outletTest1;
+
+        public TestViewController(HeisenViewModel model, HeisenViewController parent)
+        {
+            super(model, parent);
+        }
+
+        @UITarget("test")
+        public void testTarget()
+        {
+            this.targetTest1 = "Hello World!";
+        }
+
+    }
+
 }
