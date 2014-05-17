@@ -1,6 +1,7 @@
 package com.heisenbugdev.heisenui.view.element;
 
 
+import com.heisenbugdev.heisenui.logger.HeisenLogger;
 import com.heisenbugdev.heisenui.proxy.UIProxy;
 import com.heisenbugdev.heisenui.view.HeisenView;
 
@@ -22,7 +23,8 @@ public enum HeisenElementRegistry
         String name = UIProxy.nameForClass(clazz);
         if (this.registry.containsKey(name))
         {
-            throw new IndexOutOfBoundsException(String.format("HeisenElementRegistry already contains a registered element for class: %s", name));
+            HeisenLogger.warn(String.format("[HeisenElementRegistry] Warning: Tried to register view element class, %s, twice.", name));
+            return;
         }
 
         registry.put(name, clazz);
