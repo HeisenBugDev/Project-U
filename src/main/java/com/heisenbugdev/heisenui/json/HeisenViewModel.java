@@ -1,7 +1,6 @@
 package com.heisenbugdev.heisenui.json;
 
 import com.heisenbugdev.heisenui.view.HeisenFrame;
-import net.minecraft.util.ResourceLocation;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -50,7 +49,7 @@ public class HeisenViewModel
         private HeisenFrame frame;
         private int origin;
         private boolean hidden;
-        private ResourceLocation textuerLocation;
+        private String textureLocation;
         private Map<String, Object> attributes;
         private ArrayList<View> subviews;
 
@@ -79,8 +78,8 @@ public class HeisenViewModel
             return hidden;
         }
 
-        public ResourceLocation getTextuerLocation() {
-            return textuerLocation;
+        public String getTextureLocation() {
+            return textureLocation;
         }
 
         public Map<String, Object> getAttributes()
