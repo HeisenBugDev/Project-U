@@ -47,7 +47,7 @@ public class JSONDeserializeTest
         public String targetTest1 = "";
 
         @UIOutlet("TestElement2")
-        public HeisenView outletTest1 = null;
+        public HeisenView outletTest1;
 
         public TestViewController(HeisenViewModel model, HeisenViewController parent)
         {

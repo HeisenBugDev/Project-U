@@ -60,7 +60,7 @@ public class HeisenViewController
             if (annotation == null) continue;
 
             String outletIdentifier = annotation.value();
-            this.outlets().put(outletIdentifier, new Outlet(outletIdentifier, outlet));
+            this.outlets().put(outletIdentifier, new Outlet(this, outlet));
 
         }
     }
