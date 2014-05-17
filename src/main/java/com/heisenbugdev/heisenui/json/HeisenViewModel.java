@@ -49,6 +49,7 @@ public class HeisenViewModel
         private HeisenFrame frame;
         private int origin;
         private boolean hidden;
+        private String textureLocation;
         private Map<String, Object> attributes;
         private ArrayList<View> subviews;
 
@@ -75,6 +76,10 @@ public class HeisenViewModel
         public boolean isHidden()
         {
             return hidden;
+        }
+
+        public String getTextureLocation() {
+            return textureLocation;
         }
 
         public Map<String, Object> getAttributes()
