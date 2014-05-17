@@ -4,7 +4,6 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.ear
 
@@ -26,3 +25,5 @@ bin/
 eclipse/
 .idea/
 *.iml
+.project
+.classpath
