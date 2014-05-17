@@ -1,6 +1,7 @@
 package com.heisenbugdev.heisenui.json;
 
 import com.heisenbugdev.heisenui.view.HeisenFrame;
+import net.minecraft.util.ResourceLocation;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -14,6 +15,7 @@ public class HeisenViewModel
     private String identifier;
     private String controllerClass;
     private View view;
+    private ResourceLocation textuerLocation;
     private ArrayList<HeisenViewModel.Outlet> outlets;
     private ArrayList<HeisenViewModel.Target> targets;
 
@@ -30,6 +32,10 @@ public class HeisenViewModel
     public View getView()
     {
         return view;
+    }
+
+    public ResourceLocation getTextuerLocation() {
+        return textuerLocation;
     }
 
     public ArrayList<Outlet> getOutlets()
