@@ -4,7 +4,7 @@ import com.heisenbugdev.heisenui.api.view.IViewControllerRegistry;
 import com.heisenbugdev.heisenui.api.view.IViewElementRegistry;
 
 /**
- * Created by jacob on 5/17/14.
+ * This class is how you interface with HeisenUI.
  */
 public interface IHeisenUIApi
 {

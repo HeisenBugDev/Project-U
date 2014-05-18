@@ -6,6 +6,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 
 @Mod(modid = HeisenProperties.MOD_IDENTIFICATION, name = HeisenProperties.MOD_NAME, version = HeisenProperties.MOD_VERSION)
 public class HeisenUI
@@ -32,17 +33,12 @@ public class HeisenUI
         }
 
         this.api = new HeisenApiImplementation();
-        api.enable();
-
         this.proxy.registerDefaultViewElements();
     }
 
-    /**
-     * TODO: Implement this
-     * @param identifier the identifier with the string
-     */
-    public void displayViewWithIdentifier(String identifier)
+    @Mod.EventHandler
+    public void postInit(FMLPostInitializationEvent event)
     {
-
+        api.enable();
     }
 }

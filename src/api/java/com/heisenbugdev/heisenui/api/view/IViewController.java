@@ -18,11 +18,6 @@ public interface IViewController
     public void registerTargets();
 
     /**
-     * Do NOT call this method or override it yourself.
-     */
-    public void loadView();
-
-    /**
      * Use this method to set up view subviews.
      */
     @UITarget("initGui")

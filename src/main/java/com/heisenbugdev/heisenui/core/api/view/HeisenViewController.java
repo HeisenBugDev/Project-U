@@ -92,20 +92,7 @@ public class HeisenViewController implements IViewController
 
     public IView view()
     {
-        if (this._view == null)
-        {
-            this.loadView();
-        }
         return this._view;
-    }
-
-
-    /**
-     * Do NOT call this method or override it yourself.
-     */
-    public void loadView()
-    {
-        //this._view = HeisenView.viewForData(this.data);
     }
 
     /**
