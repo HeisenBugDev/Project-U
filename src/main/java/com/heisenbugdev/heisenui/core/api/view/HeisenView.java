@@ -2,6 +2,8 @@ package com.heisenbugdev.heisenui.core.api.view;
 
 import com.heisenbugdev.heisenui.api.HeisenUIInfo;
 import com.heisenbugdev.heisenui.api.json.HeisenViewModel;
+import com.heisenbugdev.heisenui.api.lib.IOutlet;
+import com.heisenbugdev.heisenui.api.lib.ITarget;
 import com.heisenbugdev.heisenui.api.view.HeisenFrame;
 import com.heisenbugdev.heisenui.api.view.IView;
 
@@ -11,7 +13,7 @@ import java.util.Map;
 public class HeisenView implements IView
 {
     private Map<String, IView> _subviews;
-    private Map<String, Target> targets;
+    private Map<String, ITarget> targets;
 
     private boolean _hidden = false;
     private HeisenFrame _frame;
@@ -32,11 +34,6 @@ public class HeisenView implements IView
     @Override
     public void addSubview(IView view)
     {
-
-    }
-
-    public void addSubview(HeisenView view)
-    {
         if (view != this)
         {
             subviews().put(view.identifier(), view);
@@ -51,14 +48,16 @@ public class HeisenView implements IView
         }
     }
 
-    public void connectTargets(Map<String, Target> targets)
+    @Override
+    public void connectTargets(Map<String, ITarget> targets)
     {
         this.targets = targets;
     }
 
-    public void connectOutlets(Map<String, Outlet> outlets)
+    @Override
+    public void connectOutlets(Map<String, IOutlet> outlets)
     {
-        for (Map.Entry<String, Outlet> outlet : outlets.entrySet())
+        for (Map.Entry<String, IOutlet> outlet : outlets.entrySet())
         {
             IView view = this.subviews().get(outlet.getKey());
             if (view != null)

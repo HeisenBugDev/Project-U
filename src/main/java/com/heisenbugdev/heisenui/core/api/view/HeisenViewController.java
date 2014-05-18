@@ -1,28 +1,30 @@
 package com.heisenbugdev.heisenui.core.api.view;
 
-import com.heisenbugdev.heisenui.api.json.HeisenViewModel;
 import com.heisenbugdev.heisenui.api.annotation.UIOutlet;
 import com.heisenbugdev.heisenui.api.annotation.UITarget;
+import com.heisenbugdev.heisenui.api.json.HeisenViewModel;
+import com.heisenbugdev.heisenui.api.lib.IOutlet;
+import com.heisenbugdev.heisenui.api.lib.ITarget;
+import com.heisenbugdev.heisenui.api.view.IView;
+import com.heisenbugdev.heisenui.api.view.IViewController;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
-public class HeisenViewController
+public class HeisenViewController implements IViewController
 {
-
     public HeisenViewController parentViewController;
-    private HeisenView _view;
+    private IView _view;
 
     //private HeisenViewModel data;
-    private HashMap<String, Outlet> _outlets;
-    private HashMap<String, Target> _targets;
+    private HashMap<String, IOutlet> _outlets;
+    private HashMap<String, ITarget> _targets;
 
     public HeisenViewController(HeisenViewModel data, HeisenViewController parentViewController)
     {
         this.parentViewController = parentViewController;
         this._view = HeisenView.viewForData(data.getView());
-
 
         registerOutlets();
         registerTargets();
@@ -31,26 +33,32 @@ public class HeisenViewController
         this._view.connectTargets(this.targets());
     }
 
-    public HashMap<String, Outlet> outlets()
+    @Override
+    public HeisenViewController parentViewController()
+    {
+        return parentViewController;
+    }
+
+    public HashMap<String, IOutlet> outlets()
     {
         if (this._outlets == null)
         {
-            this._outlets = new HashMap<String, Outlet>();
+            this._outlets = new HashMap<String, IOutlet>();
         }
         return this._outlets;
     }
 
-    public HashMap<String, Target> targets()
+    public HashMap<String, ITarget> targets()
     {
         if (this._targets == null)
         {
-            this._targets = new HashMap<String, Target>();
+            this._targets = new HashMap<String, ITarget>();
         }
         return this._targets;
     }
 
 
-    private void registerOutlets()
+    public void registerOutlets()
     {
         //HashMap<String, HeisenView> outlets = view().getOutlets();
 
@@ -67,7 +75,7 @@ public class HeisenViewController
         }
     }
 
-    private void registerTargets()
+    public void registerTargets()
     {
         // gets all the methods
         Method[] methods = this.getClass().getMethods();
@@ -82,7 +90,7 @@ public class HeisenViewController
         }
     }
 
-    public HeisenView view()
+    public IView view()
     {
         if (this._view == null)
         {

@@ -1,5 +1,8 @@
 package com.heisenbugdev.heisenui.api.view;
 
+import com.heisenbugdev.heisenui.api.lib.IOutlet;
+import com.heisenbugdev.heisenui.api.lib.ITarget;
+
 import java.util.Map;
 
 public interface IView
@@ -21,6 +24,9 @@ public interface IView
     public void addSubview(IView view);
 
     public void invokeTarget(String targetIdentifier);
+
+    public void connectOutlets(Map<String, IOutlet> outlets);
+    public void connectTargets(Map<String, ITarget> targets);
 
     public void drawForgroundLayer();
     public void drawBackgroundLayer();

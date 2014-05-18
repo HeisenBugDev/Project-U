@@ -20,7 +20,8 @@ public final class HeisenApiImplementation extends HeisenUIInfo
         return HeisenViewControllerRegistry.INSTANCE;
     }
 
-    public IViewElementRegistry getViewElementRegister()
+    @Override
+    public IViewElementRegistry getViewElementRegistry()
     {
         return HeisenElementRegistry.INSTANCE;
     }
