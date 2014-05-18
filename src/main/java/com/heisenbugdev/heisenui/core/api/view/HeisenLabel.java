@@ -1,4 +1,4 @@
-package com.heisenbugdev.heisenui.core.api.view.element;
+package com.heisenbugdev.heisenui.core.api.view;
 
 import com.heisenbugdev.heisenui.api.view.ILabel;
 import com.heisenbugdev.heisenui.core.api.view.HeisenView;

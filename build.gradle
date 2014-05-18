@@ -20,6 +20,7 @@ apply plugin: 'forge'
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.+'
+
 }
 
 // TODO: add uploading to HeisenBugDev.
@@ -32,7 +33,7 @@ if(System.getenv().TRAVIS_BUILD_NUMBER != null)
 }
 
 version = "1.0.0.${buildnumber}"
-group= "net.jadar.heisenui" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group = "com.heisenbugdev.heisenui" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "HeisenUI"
 
 minecraft {
@@ -44,9 +45,32 @@ test {
     testLogging {
         events 'passed', 'failed', 'standardOut', 'standardError'
     }
-    //testClassesDir = sourceSets.test.output.classesDir
+    classpath += sourceSets.api.runtimeClasspath
     useJUnit()
 }
+
+sourceSets {
+    api {
+        java {
+            srcDir: "src/api/java"
+        }
+        resources {
+            srcDir: "src/api/resources"
+        }
+    }
+}
+
+jar {
+
+    from sourceSets.api.output
+}
+
+task apiJar(type: Jar) {
+    from sourceSets.api.output
+    classifier = 'api'
+}
+
+build.dependsOn apiJar
 
 processResources
 {

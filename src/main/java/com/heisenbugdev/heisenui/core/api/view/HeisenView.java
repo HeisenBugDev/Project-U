@@ -1,6 +1,5 @@
 package com.heisenbugdev.heisenui.core.api.view;
 
-import com.heisenbugdev.heisenui.api.HeisenUIInfo;
 import com.heisenbugdev.heisenui.api.json.HeisenViewModel;
 import com.heisenbugdev.heisenui.api.lib.IOutlet;
 import com.heisenbugdev.heisenui.api.lib.ITarget;
@@ -146,7 +145,7 @@ public class HeisenView implements IView
     public static IView viewForData(HeisenViewModel.View data)
     {
         IView view = null;
-        Class<? extends IView> clazz = HeisenUIInfo.api().getViewElementRegistry().getRegisteredViewClass(data.getType());
+        Class<? extends IView> clazz = HeisenElementRegistry.INSTANCE.getRegisteredViewClass(data.getType());
         if (clazz == null) clazz = HeisenView.class;
 
         try

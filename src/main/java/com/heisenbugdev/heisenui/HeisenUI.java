@@ -1,5 +1,6 @@
 package com.heisenbugdev.heisenui;
 
+import com.heisenbugdev.heisenui.core.api.HeisenApiImplementation;
 import com.heisenbugdev.heisenui.proxy.UIProxy;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
@@ -16,6 +17,8 @@ public class HeisenUI
     @SidedProxy(clientSide = "com.heisenbugdev.heisenui.proxy.UIClientProxy", serverSide = "com.heisenbugdev.heisenui.proxy.UIProxy")
     public static UIProxy proxy;
 
+    public static HeisenApiImplementation api;
+
     public HeisenUI()
     {
     }
@@ -27,6 +30,9 @@ public class HeisenUI
         {
             this.proxy.debugSetup();
         }
+
+        this.api = new HeisenApiImplementation();
+        api.enable();
 
         this.proxy.registerDefaultViewElements();
     }
