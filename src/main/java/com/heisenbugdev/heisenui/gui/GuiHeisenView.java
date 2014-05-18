@@ -1,8 +1,6 @@
 package com.heisenbugdev.heisenui.gui;
 
-import com.heisenbugdev.heisenui.view.HeisenView;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiScreen;
+import com.heisenbugdev.heisenui.core.api.view.HeisenView;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
 
@@ -10,71 +8,46 @@ import net.minecraft.inventory.Container;
  * This class actually handles the @link(HeisenView) drawing, events, etc.
  * DO NOT SUBCLASS THIS UNLESS YOU ARE WORKING ON THE API.
  */
-public interface GuiHeisenView
+public class GuiHeisenView extends GuiContainer
 {
 
-    public HeisenView view();
+    protected HeisenView _view;
 
-    public static class GuiHeisenViewBase extends Gui implements GuiHeisenView
+    public GuiHeisenView(Container container, HeisenView view)
     {
-        private HeisenView view;
-
-        public GuiHeisenViewBase(HeisenView view)
-        {
-            this.view = view;
-        }
-
-        public HeisenView view()
-        {
-            return this.view;
-        }
-
+        super(container);
+        this._view = view;
     }
 
-    public static class GuiHeisenViewScreen extends GuiScreen implements GuiHeisenView
+    public HeisenView view()
     {
-        private HeisenView view;
-
-        public GuiHeisenViewScreen(HeisenView view)
-        {
-            this.view = view;
-        }
-
-        public HeisenView view()
-        {
-         return this.view;
-        }
-
+        return this._view;
     }
 
-    public static class GuiHeisenViewContainer extends GuiContainer implements GuiHeisenView
+    @Override
+    protected void drawGuiContainerBackgroundLayer(float delta, int x, int y)
     {
-        private HeisenView view;
-
-        public GuiHeisenViewContainer(Container container, HeisenView view)
-        {
-            super(container);
-            this.view = view;
-        }
-
-        public HeisenView view()
-        {
-            return this.view;
-        }
-
-        @Override
-        protected void drawGuiContainerBackgroundLayer(float delta, int x, int y)
-        {
-
-        }
-
-        @Override
-        public void initGui()
-        {
-            super.initGui();
-            this.view().invokeTarget("initGui");
-
-        }
+        this.view().drawBackgroundLayer();
     }
 
+    @Override
+    protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_)
+    {
+        super.drawGuiContainerForegroundLayer(p_146979_1_, p_146979_2_);
+        this.view().drawForgroundLayer();
+    }
+
+    @Override
+    public void initGui()
+    {
+        super.initGui();
+        this.view().invokeTarget("initGui");
+    }
+
+    @Override
+    public void onGuiClosed()
+    {
+        super.onGuiClosed();
+
+    }
 }

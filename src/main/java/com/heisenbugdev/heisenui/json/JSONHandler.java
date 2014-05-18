@@ -4,13 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.heisenbugdev.heisenui.HeisenUI;
+import com.heisenbugdev.heisenui.api.json.HeisenViewModel;
 import com.heisenbugdev.heisenui.logger.HeisenLogger;
 import net.minecraft.util.StringUtils;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class JSONHandler
 {
@@ -18,19 +16,18 @@ public class JSONHandler
     public static HeisenViewModel jsonLoaderFromFileLocation(String fileLocation) throws IOException
     {
         if (HeisenUI.DEBUG) HeisenLogger.debug("Reading JSON file" + fileLocation);
+        return jsonLoader(new FileInputStream(fileLocation));
+    }
+
+    public static HeisenViewModel jsonLoader(InputStream jsonStream) throws IOException
+    {
         String json = "";
-        try
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(jsonStream));
+        json = "";
+        while (br.ready())
         {
-            BufferedReader br = new BufferedReader(new FileReader(fileLocation));
-            json = "";
-            while (br.ready())
-            {
-                json += br.readLine();
-            }
-        }
-        catch (FileNotFoundException e)
-        {
-            HeisenLogger.warn(e + fileLocation);
+            json += br.readLine();
         }
 
         if (StringUtils.isNullOrEmpty(json)) return null;

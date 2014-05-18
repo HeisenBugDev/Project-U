@@ -1,9 +1,11 @@
-package com.heisenbugdev.heisenui.view;
+package com.heisenbugdev.heisenui.core.api.view;
+
+import com.heisenbugdev.heisenui.api.lib.ITarget;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public class Target
+public class Target implements ITarget
 {
     public Target(Object objectInstance, Method method)
     {
