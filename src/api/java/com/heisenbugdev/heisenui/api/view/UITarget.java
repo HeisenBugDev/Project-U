@@ -1,4 +1,4 @@
-package com.heisenbugdev.heisenui.view;
+package com.heisenbugdev.heisenui.api.view;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

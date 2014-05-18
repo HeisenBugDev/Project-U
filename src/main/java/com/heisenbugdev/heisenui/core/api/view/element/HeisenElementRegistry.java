@@ -1,9 +1,9 @@
-package com.heisenbugdev.heisenui.view.element;
+package com.heisenbugdev.heisenui.core.api.view.element;
 
 
+import com.heisenbugdev.heisenui.api.view.HeisenView;
 import com.heisenbugdev.heisenui.logger.HeisenLogger;
 import com.heisenbugdev.heisenui.proxy.UIProxy;
-import com.heisenbugdev.heisenui.view.HeisenView;
 
 import java.util.HashMap;
 

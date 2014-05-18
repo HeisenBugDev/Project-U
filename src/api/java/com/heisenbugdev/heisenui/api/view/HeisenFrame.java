@@ -1,4 +1,4 @@
-package com.heisenbugdev.heisenui.view;
+package com.heisenbugdev.heisenui.api.view;
 
 /**
  * Defines a view frame, or the box.

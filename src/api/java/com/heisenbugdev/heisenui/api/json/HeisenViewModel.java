@@ -1,6 +1,6 @@
-package com.heisenbugdev.heisenui.json;
+package com.heisenbugdev.heisenui.api.json;
 
-import com.heisenbugdev.heisenui.view.HeisenFrame;
+import com.heisenbugdev.heisenui.api.view.HeisenFrame;
 
 import java.util.ArrayList;
 import java.util.Map;

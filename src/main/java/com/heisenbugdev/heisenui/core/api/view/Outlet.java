@@ -1,4 +1,6 @@
-package com.heisenbugdev.heisenui.view;
+package com.heisenbugdev.heisenui.core.api.view;
+
+import com.heisenbugdev.heisenui.core.api.view.HeisenView;
 
 import java.lang.reflect.Field;
 

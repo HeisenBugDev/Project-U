@@ -1,4 +1,4 @@
-package com.heisenbugdev.heisenui.view;
+package com.heisenbugdev.heisenui.core.api.view;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

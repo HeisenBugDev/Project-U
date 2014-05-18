@@ -1,7 +1,10 @@
-package com.heisenbugdev.heisenui.view;
+package com.heisenbugdev.heisenui.core.api.view;
 
-import com.heisenbugdev.heisenui.json.HeisenViewModel;
-import com.heisenbugdev.heisenui.view.element.HeisenElementRegistry;
+import com.heisenbugdev.heisenui.api.json.HeisenViewModel;
+import com.heisenbugdev.heisenui.api.view.HeisenFrame;
+import com.heisenbugdev.heisenui.api.view.Outlet;
+import com.heisenbugdev.heisenui.api.view.Target;
+import com.heisenbugdev.heisenui.core.api.view.element.HeisenElementRegistry;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -66,16 +69,38 @@ public class HeisenView
 
     public void setAttributes(Map<String,Object> attributes) {}
 
-    public void draw(float delta)
+    public void drawForgroundLayer()
     {
         if (this.hidden) return;
 
         for (Map.Entry<String, HeisenView> entry : subviews().entrySet())
         {
             HeisenView subview = entry.getValue();
-            subview.draw(delta);
+            subview.drawForgroundLayer();
         }
     }
+
+    public void drawBackgroundLayer()
+    {
+        if (this.hidden) return;
+
+        for (Map.Entry<String, HeisenView> entry : subviews().entrySet())
+        {
+            HeisenView subview = entry.getValue();
+            subview.drawBackgroundLayer();
+        }
+    }
+
+//    public void draw(float delta)
+//    {
+//        if (this.hidden) return;
+//
+//        for (Map.Entry<String, HeisenView> entry : subviews().entrySet())
+//        {
+//            HeisenView subview = entry.getValue();
+//            subview.draw(delta);
+//        }
+//    }
 
     public static HeisenView viewForData(HeisenViewModel.View data)
     {
@@ -99,7 +124,6 @@ public class HeisenView
                     view.addSubview(subview);
                 }
             }
-            //for (HeisenViewModel.Outlet outlet : data.Out)
         }
         catch (InstantiationException e)
         {
