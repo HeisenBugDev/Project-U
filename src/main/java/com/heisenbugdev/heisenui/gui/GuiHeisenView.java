@@ -1,6 +1,6 @@
 package com.heisenbugdev.heisenui.gui;
 
-import com.heisenbugdev.heisenui.view.HeisenView;
+import com.heisenbugdev.heisenui.core.api.view.HeisenView;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
 
@@ -27,14 +27,14 @@ public class GuiHeisenView extends GuiContainer
     @Override
     protected void drawGuiContainerBackgroundLayer(float delta, int x, int y)
     {
-
+        this.view().drawBackgroundLayer();
     }
 
     @Override
     protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_)
     {
         super.drawGuiContainerForegroundLayer(p_146979_1_, p_146979_2_);
-
+        this.view().drawForgroundLayer();
     }
 
     @Override
@@ -42,8 +42,12 @@ public class GuiHeisenView extends GuiContainer
     {
         super.initGui();
         this.view().invokeTarget("initGui");
-
     }
 
+    @Override
+    public void onGuiClosed()
+    {
+        super.onGuiClosed();
 
+    }
 }

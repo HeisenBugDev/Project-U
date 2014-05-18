@@ -1,7 +1,7 @@
 package com.heisenbugdev.heisenui.core.api;
 
-import com.heisenbugdev.heisenui.api.IViewControllerRegistry;
-import com.heisenbugdev.heisenui.api.view.HeisenViewController;
+import com.heisenbugdev.heisenui.api.view.IViewControllerRegistry;
+import com.heisenbugdev.heisenui.core.api.view.HeisenViewController;
 import com.heisenbugdev.heisenui.api.json.HeisenViewModel;
 import com.heisenbugdev.heisenui.json.JSONHandler;
 import com.heisenbugdev.heisenui.logger.HeisenLogger;

@@ -1,10 +1,8 @@
 package com.heisenbugdev.heisenui.core.api.view;
 
 import com.heisenbugdev.heisenui.api.json.HeisenViewModel;
-import com.heisenbugdev.heisenui.api.view.Outlet;
-import com.heisenbugdev.heisenui.api.view.Target;
-import com.heisenbugdev.heisenui.api.view.UIOutlet;
-import com.heisenbugdev.heisenui.api.view.UITarget;
+import com.heisenbugdev.heisenui.api.annotation.UIOutlet;
+import com.heisenbugdev.heisenui.api.annotation.UITarget;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

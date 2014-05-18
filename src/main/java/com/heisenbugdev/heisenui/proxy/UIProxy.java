@@ -1,9 +1,14 @@
 package com.heisenbugdev.heisenui.proxy;
 
-import com.heisenbugdev.heisenui.view.element.*;
+import com.heisenbugdev.heisenui.DebugItem;
+import com.heisenbugdev.heisenui.core.api.view.element.*;
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.item.Item;
 
 public class UIProxy
 {
+    public static Item debugItem = new DebugItem();
+
     public void registerDefaultViewElements()
     {
         HeisenElementRegistry.INSTANCE.registerViewElement(HeisenButton.class);
@@ -26,4 +31,8 @@ public class UIProxy
         }
     }
 
+    public void debugSetup()
+    {
+        GameRegistry.registerItem(debugItem, debugItem.getUnlocalizedName());
+    }
 }

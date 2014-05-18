@@ -1,12 +1,12 @@
 package com.heisenbugdev.heisenui.test.json;
 
-import com.heisenbugdev.heisenui.json.HeisenViewModel;
+import com.heisenbugdev.heisenui.api.json.HeisenViewModel;
 import com.heisenbugdev.heisenui.json.JSONHandler;
 import com.heisenbugdev.heisenui.proxy.UIProxy;
-import com.heisenbugdev.heisenui.view.HeisenView;
-import com.heisenbugdev.heisenui.view.HeisenViewController;
-import com.heisenbugdev.heisenui.view.UIOutlet;
-import com.heisenbugdev.heisenui.view.UITarget;
+import com.heisenbugdev.heisenui.core.api.view.HeisenView;
+import com.heisenbugdev.heisenui.core.api.view.HeisenViewController;
+import com.heisenbugdev.heisenui.api.annotation.UIOutlet;
+import com.heisenbugdev.heisenui.api.annotation.UITarget;
 import org.junit.Assert;
 import org.junit.Test;
 

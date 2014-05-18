@@ -1,8 +1,27 @@
 package com.heisenbugdev.heisenui.core.api;
 
-/**
- * Created by jacob on 5/17/14.
- */
-public class HeisenApiImplementation
+import com.heisenbugdev.heisenui.api.HeisenUIInfo;
+import com.heisenbugdev.heisenui.api.view.IViewControllerRegistry;
+import com.heisenbugdev.heisenui.api.view.IViewElementRegistry;
+import com.heisenbugdev.heisenui.core.api.view.element.HeisenElementRegistry;
+
+public final class HeisenApiImplementation extends HeisenUIInfo
 {
+
+    public void enable()
+    {
+        this._api = this;
+    }
+
+
+    @Override
+    public IViewControllerRegistry getViewControllerRegistry()
+    {
+        return HeisenViewControllerRegistry.INSTANCE;
+    }
+
+    public IViewElementRegistry getViewElementRegister()
+    {
+        return HeisenElementRegistry.INSTANCE;
+    }
 }

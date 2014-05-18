@@ -1,6 +1,6 @@
 package com.heisenbugdev.heisenui.core.api.view;
 
-import com.heisenbugdev.heisenui.core.api.view.HeisenView;
+import com.heisenbugdev.heisenui.api.view.IView;
 
 import java.lang.reflect.Field;
 
@@ -15,7 +15,7 @@ public class Outlet
     private Field field;
     private Object objectInstance;
 
-    public void set(HeisenView value)
+    public void set(IView value)
     {
         try
         {

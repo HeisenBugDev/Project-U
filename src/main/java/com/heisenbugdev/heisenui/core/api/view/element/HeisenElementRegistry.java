@@ -1,24 +1,26 @@
 package com.heisenbugdev.heisenui.core.api.view.element;
 
 
-import com.heisenbugdev.heisenui.api.view.HeisenView;
+import com.heisenbugdev.heisenui.api.view.IView;
+import com.heisenbugdev.heisenui.api.view.IViewElementRegistry;
 import com.heisenbugdev.heisenui.logger.HeisenLogger;
 import com.heisenbugdev.heisenui.proxy.UIProxy;
 
 import java.util.HashMap;
 
-public enum HeisenElementRegistry
+public enum HeisenElementRegistry implements IViewElementRegistry
 {
     INSTANCE;
 
-    public HashMap<String, Class<? extends HeisenView>> registry;
+    public HashMap<String, Class<? extends IView>> registry;
 
     private HeisenElementRegistry()
     {
-        registry = new HashMap<String, Class<? extends HeisenView>>();
+        registry = new HashMap<String, Class<? extends IView>>();
     }
 
-    public void registerViewElement(Class<? extends HeisenView> clazz)
+    @Override
+    public void registerViewElement(Class<? extends IView> clazz)
     {
         String name = UIProxy.nameForClass(clazz);
         if (this.registry.containsKey(name))
@@ -30,7 +32,8 @@ public enum HeisenElementRegistry
         registry.put(name, clazz);
     }
 
-    public Class<? extends HeisenView> getRegisteredViewClass(String name)
+    @Override
+    public Class<? extends IView> getRegisteredViewClass(String name)
     {
         return registry.get(name);
     }

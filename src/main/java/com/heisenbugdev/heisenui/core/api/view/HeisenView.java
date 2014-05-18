@@ -1,39 +1,45 @@
 package com.heisenbugdev.heisenui.core.api.view;
 
+import com.heisenbugdev.heisenui.api.HeisenUIInfo;
 import com.heisenbugdev.heisenui.api.json.HeisenViewModel;
 import com.heisenbugdev.heisenui.api.view.HeisenFrame;
-import com.heisenbugdev.heisenui.api.view.Outlet;
-import com.heisenbugdev.heisenui.api.view.Target;
-import com.heisenbugdev.heisenui.core.api.view.element.HeisenElementRegistry;
+import com.heisenbugdev.heisenui.api.view.IView;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class HeisenView
+public class HeisenView implements IView
 {
-    public Map<String, HeisenView> _subviews;
+    private Map<String, IView> _subviews;
     private Map<String, Target> targets;
 
-    public boolean hidden = false;
-    public HeisenFrame frame;
-    public String identifier = "";
+    private boolean _hidden = false;
+    private HeisenFrame _frame;
+
+    private String _identifier = "";
 
     public HeisenView() {}
 
-    public Map<String, HeisenView> subviews()
+    public Map<String, IView> subviews()
     {
         if (_subviews == null)
         {
-            _subviews = new HashMap<String, HeisenView>();
+            _subviews = new HashMap<String, IView>();
         }
         return _subviews;
+    }
+
+    @Override
+    public void addSubview(IView view)
+    {
+
     }
 
     public void addSubview(HeisenView view)
     {
         if (view != this)
         {
-            subviews().put(view.identifier, view);
+            subviews().put(view.identifier(), view);
         }
     }
 
@@ -54,73 +60,109 @@ public class HeisenView
     {
         for (Map.Entry<String, Outlet> outlet : outlets.entrySet())
         {
-            HeisenView view = this.subviews().get(outlet.getKey());
+            IView view = this.subviews().get(outlet.getKey());
             if (view != null)
             {
                 outlet.getValue().set(view);
             }
         }
 
-        for (HeisenView view : this.subviews().values())
+        for (IView view : this.subviews().values())
         {
-            view.connectOutlets(outlets);
+            ((HeisenView)view).connectOutlets(outlets);
         }
     }
 
     public void setAttributes(Map<String,Object> attributes) {}
 
+    @Override
+    public String identifier()
+    {
+        return this._identifier;
+    }
+
+    @Override
+    public void setIdentifier(String identifier)
+    {
+        this._identifier = identifier;
+    }
+
+    @Override
+    public HeisenFrame frame()
+    {
+        return this._frame;
+    }
+
+    @Override
+    public void setFrame(HeisenFrame frame)
+    {
+        this._frame = frame;
+    }
+
+    @Override
+    public boolean hidden()
+    {
+        return false;
+    }
+
+    @Override
+    public void setHidden(boolean hidden)
+    {
+
+    }
+
     public void drawForgroundLayer()
     {
-        if (this.hidden) return;
+        if (this.hidden()) return;
 
-        for (Map.Entry<String, HeisenView> entry : subviews().entrySet())
+        for (Map.Entry<String, IView> entry : subviews().entrySet())
         {
-            HeisenView subview = entry.getValue();
+            IView subview = entry.getValue();
             subview.drawForgroundLayer();
         }
     }
 
     public void drawBackgroundLayer()
     {
-        if (this.hidden) return;
+        if (this.hidden()) return;
 
-        for (Map.Entry<String, HeisenView> entry : subviews().entrySet())
+        for (Map.Entry<String, IView> entry : subviews().entrySet())
         {
-            HeisenView subview = entry.getValue();
+            IView subview = entry.getValue();
             subview.drawBackgroundLayer();
         }
     }
 
-//    public void draw(float delta)
-//    {
-//        if (this.hidden) return;
-//
-//        for (Map.Entry<String, HeisenView> entry : subviews().entrySet())
-//        {
-//            HeisenView subview = entry.getValue();
-//            subview.draw(delta);
-//        }
-//    }
-
-    public static HeisenView viewForData(HeisenViewModel.View data)
+    public void draw(int mouseX, int mouseY)
     {
-        HeisenView view = null;
-        Class<? extends HeisenView> clazz = HeisenElementRegistry.INSTANCE.getRegisteredViewClass(data.getType());
+        if (this.hidden()) return;
+
+        for (Map.Entry<String, IView> entry : subviews().entrySet())
+        {
+            IView subview = entry.getValue();
+            subview.draw(mouseX, mouseY);
+        }
+    }
+
+    public static IView viewForData(HeisenViewModel.View data)
+    {
+        IView view = null;
+        Class<? extends IView> clazz = HeisenUIInfo.api().getViewElementRegistry().getRegisteredViewClass(data.getType());
         if (clazz == null) clazz = HeisenView.class;
 
         try
         {
             view = clazz.newInstance();
-            view.frame = data.getFrame();
-            view.hidden = data.isHidden();
-            view.identifier = data.getIdentifier();
+            view.setFrame(data.getFrame());
+            view.setHidden(data.isHidden());
+            view.setIdentifier(data.getIdentifier());
             view.setAttributes(data.getAttributes());
 
             if (data.getSubviews() != null)
             {
                 for (HeisenViewModel.View subviewModel : data.getSubviews())
                 {
-                    HeisenView subview = HeisenView.viewForData(subviewModel);
+                    IView subview = HeisenView.viewForData(subviewModel);
                     view.addSubview(subview);
                 }
             }
